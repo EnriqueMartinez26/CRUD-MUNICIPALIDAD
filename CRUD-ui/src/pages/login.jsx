@@ -79,15 +79,16 @@ const styles = {
         color: '#333',
   },
   input: {
+    width: '100%',
     padding: '0.8rem',
     marginTop: '0.5rem',
     border: '1px solid #ccc',
     borderRadius: '5px',
     fontSize: '1em',
-
+    boxSizing: 'border-box', 
   },
-  
   button: {
+    width: '100%',
     padding: '0.8rem',
     backgroundColor: '#007bff',
     border: 'none',
@@ -95,6 +96,7 @@ const styles = {
     fontSize: '1.2em',
     cursor: 'pointer',
     marginTop: '1rem',
+    boxSizing: 'border-box',
   },
   error: {
     color: 'red',
