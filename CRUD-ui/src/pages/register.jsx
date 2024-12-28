@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";  
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -83,6 +83,15 @@ const Register = () => {
         </div>
 
         <button type="submit" style={styles.button}>Registrarse</button>
+
+        {}
+        <p style={styles.loginText}>
+          ¿Ya tienes una cuenta?{" "}
+          <Link to="/iniciarsesion" style={styles.loginLink}>
+            Iniciar sesión
+          </Link>
+        </p>
+
       </form>
     </div>
   );
@@ -128,7 +137,7 @@ const styles = {
     boxSizing: 'border-box',
   },
   button: {
-    width: '100%',  
+    width: '100%',
     padding: '0.8rem',
     backgroundColor: '#007bff',
     color: '#fff',
@@ -138,6 +147,16 @@ const styles = {
     cursor: 'pointer',
     marginTop: '1rem',
     boxSizing: 'border-box',
+  },
+  loginText: {
+    marginTop: '1rem',
+    textAlign: 'center',
+    fontSize: '1em',
+    color: '#333',
+  },
+  loginLink: {
+    color: '#007bff',
+    textDecoration: 'none',
   },
   error: {
     color: 'red',
@@ -150,6 +169,5 @@ const styles = {
     marginBottom: '1rem',
   },
 };
-
 
 export default Register;
