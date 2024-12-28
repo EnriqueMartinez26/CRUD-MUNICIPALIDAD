@@ -1,7 +1,8 @@
+import LOGO from '../images/LOGO.png'
 const Header = () => (
     <header style={styles.header}>
-      <img src="../images/R.png" style={styles.image} />
-      <h1 style={styles.h1}>Task Manager</h1>
+      <img src={LOGO} style={styles.image} />
+      <h1 style={styles.h1}>CiDiTuc</h1>
     </header>
   );
   
