@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/homeome';
-import TaskManager from './pages/taskmanagerr';
+import Home from './pages/home';
+import TaskManager from './pages/tasks';
 import Header from './components/header';
-import Footer from './components/footerooter';
+import Footer from './components/footer';
 
 const App = () => {
   return (
