@@ -5,10 +5,12 @@ const Home = () => (
     <h2>Bienvenido a la Municipalidad de SMT</h2>
     <p>PROYECTO - CRUD</p>
     <div style={styles.buttons}>
-      <Link to="/tasks" style={styles.link}>
+      <Link to="/iniciarsesion" style={styles.link}>
         <button style={styles.button}>Iniciar Sesión</button>
       </Link>
+      <Link to="/registro" style={styles.link}>
       <button style={styles.button}>Registrarse</button>
+      </Link>
     </div>
   </main>
 );
@@ -37,9 +39,6 @@ const styles = {
     borderRadius: '5px',
     cursor: 'pointer',
     fontSize: '1em',
-  },
-  link: {
-    textDecoration: 'none',
   },
 };
 
