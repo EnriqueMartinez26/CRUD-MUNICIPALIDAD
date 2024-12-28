@@ -15,20 +15,25 @@ const Home = () => (
 
 const styles = {
   h2: {
-    color: '#000000', // Color negro
+    color: '#000000',
   },
   p: {
-    color: '#000000', // Color negro para el párrafo
-    fontSize: '1.2em', // Ejemplo de ajuste de tamaño de fuente
-    margin: '1em 0',   // Ajuste de márgenes
+    color: '#000000',
+    fontSize: '1.2em',
+    margin: '1em 0',
   },
   main: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100vh',
     padding: '2em',
     textAlign: 'center',
     backgroundColor: '#ffffff',
     borderRadius: '8px',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-    margin: '2em auto',
+    margin: '0 auto',
     maxWidth: '600px',
   },
   buttons: {
