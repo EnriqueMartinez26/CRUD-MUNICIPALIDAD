@@ -79,7 +79,6 @@ const styles = {
         color: '#333',
   },
   input: {
-    width: '100%',
     padding: '0.8rem',
     marginTop: '0.5rem',
     border: '1px solid #ccc',

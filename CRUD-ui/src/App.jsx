@@ -4,6 +4,7 @@ import TaskManager from './pages/tasks';
 import Header from './components/header';
 import Footer from './components/footer';
 import Login from './pages/login';
+import Register from './pages/register';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/tasks" element={<TaskManager />} />
         <Route path='/iniciarsesion' element={<Login />} />
+        <Route path='/registro' element={<Register />} />
       </Routes>
       <Footer />
     </Router>

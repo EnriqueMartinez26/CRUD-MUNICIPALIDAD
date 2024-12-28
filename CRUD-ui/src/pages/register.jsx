@@ -11,7 +11,6 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validación
     if (!name || !email || !password || !confirmPassword) {
       setError('Por favor complete todos los campos');
       return;
