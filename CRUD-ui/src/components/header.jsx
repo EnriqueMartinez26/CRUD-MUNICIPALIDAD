@@ -9,16 +9,16 @@ const Header = () => (
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      width: '100%', 
-      height: '100px', 
-      backgroundColor: '#007bff',
+      width: '100%',
+      height: '100px',
+      backgroundColor: '#ffffff', 
       margin: 0,
-      padding: 0, 
+      padding: 0,
     },
     h1: {
       margin: 0,
       fontSize: '2.5em',
-      color: '#ffffff',
+      color: '#333333', 
     },
   };
   
