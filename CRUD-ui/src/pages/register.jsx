@@ -125,8 +125,10 @@ const styles = {
     border: '1px solid #ccc',
     borderRadius: '5px',
     fontSize: '1em',
+    boxSizing: 'border-box',
   },
   button: {
+    width: '100%',  
     padding: '0.8rem',
     backgroundColor: '#007bff',
     color: '#fff',
@@ -135,6 +137,7 @@ const styles = {
     fontSize: '1.2em',
     cursor: 'pointer',
     marginTop: '1rem',
+    boxSizing: 'border-box',
   },
   error: {
     color: 'red',
@@ -147,5 +150,6 @@ const styles = {
     marginBottom: '1rem',
   },
 };
+
 
 export default Register;
