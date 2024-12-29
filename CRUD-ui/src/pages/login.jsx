@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";  
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +22,7 @@ const Login = () => {
       <form onSubmit={handleSubmit} style={styles.form}>
         <h2 style={styles.h2}>Iniciar sesión</h2>
         {error && <p style={styles.error}>{error}</p>}
+        
         <div style={styles.inputGroup}>
           <label htmlFor="email" style={styles.label}>Correo electrónico</label>
           <input
@@ -31,6 +34,7 @@ const Login = () => {
             required
           />
         </div>
+
         <div style={styles.inputGroup}>
           <label htmlFor="password" style={styles.label}>Contraseña</label>
           <input
@@ -42,7 +46,17 @@ const Login = () => {
             required
           />
         </div>
+
         <button type="submit" style={styles.button}>Iniciar sesión</button>
+
+        {/* Texto y enlace para registrarse */}
+        <p style={styles.registerText}>
+          ¿No tienes una cuenta?{" "}
+          <Link to="/registro" style={styles.registerLink}>
+            Registrarse
+          </Link>
+        </p>
+
       </form>
     </div>
   );
@@ -76,7 +90,7 @@ const styles = {
   },
   label: {
     fontSize: '1em',
-        color: '#333',
+    color: '#333',
   },
   input: {
     width: '100%',
@@ -102,6 +116,16 @@ const styles = {
     color: 'red',
     fontSize: '1em',
     marginBottom: '1rem',
+  },
+  registerText: {
+    marginTop: '1rem',
+    textAlign: 'center',
+    fontSize: '1em',
+    color: '#333',
+  },
+  registerLink: {
+    color: '#007bff',
+    textDecoration: 'none',
   },
 };
 
