@@ -99,7 +99,7 @@ const styles = {
     border: '1px solid #ccc',
     borderRadius: '5px',
     fontSize: '1em',
-    boxSizing: 'border-box', 
+    boxSizing: 'border-box',
   },
   button: {
     width: '100%',
@@ -110,6 +110,7 @@ const styles = {
     fontSize: '1.2em',
     cursor: 'pointer',
     marginTop: '1rem',
+    color: 'white',  
     boxSizing: 'border-box',
   },
   error: {
@@ -128,5 +129,6 @@ const styles = {
     textDecoration: 'none',
   },
 };
+
 
 export default Login;
