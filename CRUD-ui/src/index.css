@@ -7,17 +7,15 @@ html, body {
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  display: block; 
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: block;
   background-color: #ffffff;
 }
+
+
 
 input {
   background-color: #ffffff;
@@ -59,7 +57,7 @@ button:focus-visible {
 /* Home */
 .home-page {
   background-color: #e0f7fa; /* Fondo */
-  height: 100vh;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -195,6 +193,19 @@ button:focus-visible {
   .home-main {
     padding: 2rem;
   }
+
+  .home-container {
+    flex-direction: column; /* Para pantallas más pequeñas, apilar las tarjetas */
+  }
+}
+
+/* Ajuste para el contenedor de las tarjetas */
+.home-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
 }
 
 /* Crear Usuario - Modificado */
