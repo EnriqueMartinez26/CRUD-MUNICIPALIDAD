@@ -8,17 +8,44 @@ const Gestion = () => (
   <Container className="mt-5">
     <Row className="justify-content-center">
       <Col md={8} lg={6}>
-        <h1 className="text-center mb-4">Bienvenido a la Gestión de Usuarios</h1>
-        <Card className="shadow">
-          <Card.Header>Featured</Card.Header>
+        <h1 className="text-center mb-4 fw-bold fst-italic">Gestión</h1>
+      </Col>
+    </Row>
+
+    <Row className="justify-content-center">
+      <Col md={6} lg={5}>
+        <Card>
+          <Card.Header>Listado</Card.Header>
           <Card.Body>
-            <Card.Title>Special title treatment</Card.Title>
+            <Card.Title>Visualizá una lista con los empleados ya registrados</Card.Title>
             <Card.Text>
-              With supporting text below as a natural lead-in to additional content.
+              (No editable)
             </Card.Text>
-            <Button variant="primary">Go somewhere</Button>
+            <Button 
+              variant="primary" 
+              href="/listado" 
+            >
+              Ir a listado
+            </Button>
           </Card.Body>
-          <Card.Footer className="text-muted">2 days ago</Card.Footer>
+        </Card>
+      </Col>
+
+      <Col md={6} lg={5}>
+        <Card>
+          <Card.Header>Administrar</Card.Header>
+          <Card.Body>
+            <Card.Title>Editá la lista de empleados</Card.Title>
+            <Card.Text>
+              (Requiere iniciar como administrador)
+            </Card.Text>
+            <Button 
+              variant="success" 
+              href="/listado" 
+            >
+              Ir a administrar
+            </Button>
+          </Card.Body>
         </Card>
       </Col>
     </Row>
