@@ -4,6 +4,7 @@ import * as React from 'react'
 
 export const PopoverContent = React.forwardRef(
   function PopoverContent(props, ref) {
+    // eslint-disable-next-line react/prop-types
     const { portalled = true, portalRef, ...rest } = props
     return (
       <Portal disabled={!portalled} container={portalRef}>
