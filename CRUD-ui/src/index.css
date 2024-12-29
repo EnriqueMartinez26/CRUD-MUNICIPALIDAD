@@ -1,15 +1,15 @@
+/* General */
 html, body {
   height: 100%;
   margin: 0;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
 }
 
 #root {
   display: flex;
   flex-direction: column;
   height: 100%;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  
 }
 
 body {
@@ -20,8 +20,8 @@ body {
 }
 
 input {
-  background-color: #ffffff; 
-  color: #333333; 
+  background-color: #ffffff;
+  color: #333333;
   border: 1px solid #ccc;
   padding: 0.6em 1.2em;
   border-radius: 8px;
@@ -29,9 +29,10 @@ input {
   font-family: inherit;
   box-sizing: border-box;
 }
+
 button {
-  color: #ffffff; 
-  background-color: #007bff; 
+  color: #ffffff;
+  background-color: #007bff;
   border: none;
   padding: 0.6em 1.2em;
   border-radius: 8px;
@@ -46,33 +47,16 @@ input:focus {
   outline: none;
 }
 
-
-main {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  text-align: center;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-  max-width: 600px;
-}
-
-
-
 button:hover {
-  border-color: #646cff;
-
+  background-color: #0056b3;
 }
 
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+/* Home */
 .home-page {
   background-color: #e0f7fa; /* Fondo */
   height: 100vh;
@@ -128,4 +112,87 @@ button:focus-visible {
 
 .home-button:hover {
   background-color: #0056b3;
+}
+
+/* Crear Usuario */
+.crear-usuario-container {
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.crear-usuario-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.crear-usuario-input-group {
+  margin-bottom: 1rem;
+}
+
+.crear-usuario-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Errores */
+.error {
+  color: red;
+  font-size: 0.9em;
+}
+
+/* Listar Usuarios */
+.listar-usuarios-container {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.listar-usuarios-search-input {
+  width: 100%;
+  padding: 0.8em;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.listar-usuarios-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.listar-usuarios-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  margin: 0.2em;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 2em;
+  }
+
+  .home-button {
+    font-size: 1em;
+    padding: 0.8em 1.5em;
+  }
+
+  .home-main {
+    padding: 2rem;
+  }
 }
