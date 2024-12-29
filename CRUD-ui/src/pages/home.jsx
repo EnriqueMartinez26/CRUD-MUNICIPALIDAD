@@ -19,14 +19,14 @@ const Home = () => (
 
 const styles = {
   page: {
-    backgroundColor: '#f4f4f4',  // Fondo de la página
-    height: '100vh',             // Ocupa toda la altura de la ventana
+    backgroundColor: '#f4f4f4',  
+    height: '100vh',            
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
   main: {
-    backgroundColor: '#ffffff',  // Fondo del contenedor principal
+    backgroundColor: '#ffffff', 
     padding: '2rem',
     borderRadius: '8px',
     boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
