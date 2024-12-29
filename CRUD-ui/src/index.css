@@ -1,4 +1,4 @@
-/* General */
+
 html, body {
   height: 100%;
   margin: 0;
@@ -195,4 +195,62 @@ button:focus-visible {
   .home-main {
     padding: 2rem;
   }
+}
+
+/* Crear Usuario - Modificado */
+.crear-usuario-container {
+  padding: 2rem;
+  max-width: 600px;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.crear-usuario-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.crear-usuario-input-group {
+  margin-bottom: 1rem;
+}
+
+.crear-usuario-label {
+  font-size: 1em;
+  color: #333;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.crear-usuario-input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.crear-usuario-button {
+  padding: 0.8rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+/* Mensajes de Error y Exito */
+.crear-usuario-error {
+  color: red;
+  font-size: 1em;
+  margin-bottom: 1rem;
+}
+
+.crear-usuario-success {
+  color: green;
+  font-size: 1em;
+  margin-bottom: 1rem;
 }
