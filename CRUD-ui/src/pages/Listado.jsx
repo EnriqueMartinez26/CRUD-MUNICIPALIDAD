@@ -18,14 +18,14 @@ const empleados = [
 const Listado = () => {
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [employeesPerPage] = useState(3); // Número de empleados por página
+  const [employeesPerPage] = useState(3); 
 
-  // Filtrar empleados según la búsqueda (incluyendo búsqueda por ID)
+
   const filteredEmployees = empleados.filter(empleado =>
     empleado.nombre.toLowerCase().includes(search.toLowerCase()) ||
     empleado.apellido.toLowerCase().includes(search.toLowerCase()) ||
     empleado.correo.toLowerCase().includes(search.toLowerCase()) ||
-    empleado.id.toString().includes(search) // Añadir búsqueda por ID
+    empleado.id.toString().includes(search) 
   );
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
@@ -36,7 +36,7 @@ const Listado = () => {
     setCurrentPage(pageNumber);
   };
 
-  // Resetear la página cuando cambia la búsqueda
+
   useEffect(() => {
     setCurrentPage(1);
   }, [search]);
@@ -75,7 +75,6 @@ const Listado = () => {
             <tbody>
               {currentEmployees.map((empleado) => (
                 <tr key={empleado.id}>
-                  {/* Mostrar el ID real del empleado */}
                   <td>{empleado.id}</td>
                   <td>{empleado.nombre}</td>
                   <td>{empleado.apellido}</td>
