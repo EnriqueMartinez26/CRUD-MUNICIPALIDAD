@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";  
+import { useNavigate } from "react-router-dom"; 
+
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -8,8 +9,10 @@ const Register = () => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
+  const navigate = useNavigate(); 
   const handleSubmit = (e) => {
     e.preventDefault();
+
 
     if (!name || !email || !password || !confirmPassword) {
       setError('Por favor complete todos los campos');
@@ -25,6 +28,13 @@ const Register = () => {
     setSuccess('Registro exitoso');
 
     console.log("Usuario registrado:", { name, email, password });
+
+ 
+    setTimeout(() => navigate("/login"), 2000);
+  };
+
+  const handleLoginRedirect = () => {
+    navigate("/login");
   };
 
   return (
@@ -83,15 +93,12 @@ const Register = () => {
         </div>
 
         <button type="submit" style={styles.button}>Registrarse</button>
-
-        {}
-        <p style={styles.loginText}>
-          ¿Ya tienes una cuenta?{" "}
-          <Link to="/iniciarsesion" style={styles.loginLink}>
-            Iniciar sesión
-          </Link>
+        <p style={styles.text}>
+          ¿Ya tienes una cuenta?{' '}
+          <span style={styles.link} onClick={handleLoginRedirect}>
+            Inicia sesión
+          </span>
         </p>
-
       </form>
     </div>
   );
@@ -134,10 +141,8 @@ const styles = {
     border: '1px solid #ccc',
     borderRadius: '5px',
     fontSize: '1em',
-    boxSizing: 'border-box',
   },
   button: {
-    width: '100%',
     padding: '0.8rem',
     backgroundColor: '#007bff',
     color: '#fff',
@@ -146,17 +151,6 @@ const styles = {
     fontSize: '1.2em',
     cursor: 'pointer',
     marginTop: '1rem',
-    boxSizing: 'border-box',
-  },
-  loginText: {
-    marginTop: '1rem',
-    textAlign: 'center',
-    fontSize: '1em',
-    color: '#333',
-  },
-  loginLink: {
-    color: '#007bff',
-    textDecoration: 'none',
   },
   error: {
     color: 'red',
@@ -167,6 +161,17 @@ const styles = {
     color: 'green',
     fontSize: '1em',
     marginBottom: '1rem',
+  },
+  text: {
+    marginTop: '1rem',
+    fontSize: '0.9em',
+    textAlign: 'center',
+    color: '#333',
+  },
+  link: {
+    color: '#007bff',
+    cursor: 'pointer',
+    textDecoration: 'underline',
   },
 };
 
