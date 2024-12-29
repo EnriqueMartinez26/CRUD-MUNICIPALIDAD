@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
-const Home2 = () => (
+
+const Gestion = () => (
   <div className="home-container">
     <header className="home-header">
       <h1 className="home-title">Bienvenido a la Gestión de Usuarios</h1>
@@ -17,4 +18,4 @@ const Home2 = () => (
   </div>
 );
 
-export default Home2;
+export default Gestion;

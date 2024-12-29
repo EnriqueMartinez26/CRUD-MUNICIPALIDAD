@@ -5,8 +5,9 @@ import Header from './components/header';
 import Footer from './components/footer';
 import Login from './pages/login';
 import Register from './pages/register';
-import Home2 from './pages/home2';
+import Gestion from './pages/gestion';
 import CrearUsuario from './pages/crearusuario';
+import ListarUsuarios from './pages/listarusuarios';
 
 const App = () => {
   return (
@@ -17,8 +18,9 @@ const App = () => {
         <Route path="/tasks" element={<TaskManager />} />
         <Route path='/login' element={<Login />} />
         <Route path='/registro' element={<Register />} />
-        <Route path='/home2' element={<Home2 />} />
-        <Route path='crearusuario' element={<CrearUsuario />} />  
+        <Route path='/gestion' element={<Gestion />} />
+        <Route path='/crear-usuario' element={<CrearUsuario />} />  
+        <Route path='/listar-usuarios' element={<ListarUsuarios />} />
       </Routes>
       <Footer />
     </Router>
