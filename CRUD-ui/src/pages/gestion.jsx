@@ -1,36 +1,20 @@
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+  import Card from 'react-bootstrap/Card';
+  import CardComponent from '../components/card1';
 
 const Gestion = () => (
-  <div className="home-container">
-    <header className="home-header">
-      <h1 className="home-title">Bienvenido a la Gestión de Usuarios</h1>
-      <p className="home-subtitle">Accede a las funcionalidades de la aplicación.</p>
-    </header>
-
-    <div className="home-buttons">
-      <Link to="/crear-usuario" className="home-link">
-        <button className="home-button">Crear Usuario</button>
-      </Link>
-      <Link to="/listar-usuarios" className="home-link">
-        <button className="home-button">Lista de Usuarios</button>
-      </Link>
-    </div>
-
-
-    <div className="home-card">
-      <Card>
-        <Card.Header as="h5" className="bg-secondary text-white">Featured</Card.Header>
-        <Card.Body>
-          <Card.Title>Special title treatment</Card.Title>
-          <Card.Text>
-            With supporting text below as a natural lead-in to additional content.
-          </Card.Text>
-          <Button variant="secondary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
-    </div>
+  <div>
+    <h1 className="home-title">Bienvenido a la Gestión de Usuarios</h1>
+    <Card bg="primary" text="white" style={{ width: '18rem' }} className="mb-2">
+      <Card.Header>Gestión</Card.Header>
+      <Card.Body>
+        <Card.Title>Card Título</Card.Title>
+        <Card.Text>
+          Este es un ejemplo de una tarjeta con el color de fondo primary. Puedes
+          personalizar su contenido según tus necesidades.
+        </Card.Text>
+      </Card.Body>
+    </Card>
+    <CardComponent></CardComponent>
   </div>
 );
 
