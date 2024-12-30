@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { process } from 'react-native-dotenv';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
@@ -29,7 +28,7 @@ const Register = () => {
     setError('');
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/register`, {
+      const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/register`, {
         name,
         email,
         password,
