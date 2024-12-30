@@ -9,7 +9,7 @@ const Home = () => (
         <Link to="/login" style={styles.homeLink}>
           <button style={styles.homeButton}>Iniciar Sesión</button>
         </Link>
-        <Link to="/registro" style={styles.homeLink}>
+        <Link to="/register" style={styles.homeLink}>
           <button style={styles.homeButton}>Registrarse</button>
         </Link>
       </div>
@@ -19,7 +19,7 @@ const Home = () => (
 
 const styles = {
   homePage: {
-    backgroundColor: '#e0f7fa', // Fondo
+    backgroundColor: '#e0f7fa',
     height: '70vh',
     display: 'flex',
     justifyContent: 'center',
