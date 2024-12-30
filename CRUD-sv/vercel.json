@@ -9,14 +9,20 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "./index.js"
+      "dest": "./index.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
+      }
     }
   ],
   "env": {
-    "DB_HOST": "mysql.railway.internal",
+    "DB_HOST": "monorail.proxy.rlwy.net",
     "DB_USER": "root",
     "DB_PASSWORD": "HeZmZCYVkRLqwywghAHjPmYynajGEyeU",
     "DB_NAME": "crud_db",
-    "DB_PORT": "3306"
+    "DB_PORT": "33117"
   }
 }
