@@ -14,7 +14,7 @@ const Gestion = () => (
 
     <Row className="justify-content-center">
       <Col md={6} lg={5}>
-        <Card border="primary">
+        <Card border="info">
           <Card.Header>Listado</Card.Header>
           <Card.Body>
             <Card.Title>Visualizá una lista con los empleados ya registrados</Card.Title>
@@ -25,7 +25,7 @@ const Gestion = () => (
               variant="primary" 
               href="/listado" 
             >
-              Ir a listado
+              Listado
             </Button>
           </Card.Body>
         </Card>
@@ -43,7 +43,7 @@ const Gestion = () => (
               variant="success" 
               href="/listado" 
             >
-              Ir a administrar
+              Administrar
             </Button>
           </Card.Body>
         </Card>
