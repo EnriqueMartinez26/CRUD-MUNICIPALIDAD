@@ -1,4 +1,5 @@
-const Empleado = require('../models/Empleado');
+const { validationResult } = require('express-validator');
+const Empleado = require('../models/Empleado.js');
 
 const getEmpleados = async (req, res) => {
   try {
@@ -25,6 +26,11 @@ const getEmpleadoById = async (req, res) => {
 };
 
 const crearEmpleado = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const nuevoEmpleado = await Empleado.create(req.body);
     res.status(201).json(nuevoEmpleado);
@@ -35,6 +41,11 @@ const crearEmpleado = async (req, res) => {
 };
 
 const actualizarEmpleado = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const empleado = await Empleado.findByPk(req.params.id);
     if (empleado) {

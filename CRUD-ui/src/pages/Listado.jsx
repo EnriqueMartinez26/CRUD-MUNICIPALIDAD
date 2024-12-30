@@ -1,32 +1,23 @@
-import { useState, useEffect } from 'react';
-import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import Pagination from 'react-bootstrap/Pagination';
 
-const empleados = [
-  { id: 1, nombre: 'Juan', apellido: 'Pérez', correo: 'juan.perez@hotmail.com', sueldo: 500000, telefono: '+54381 456-7890', area: 'Ventas' },
-  { id: 2, nombre: 'María', apellido: 'Gómez', correo: 'maria.gomez@hotmail.com', sueldo: 600000, telefono: '+54381 765-4321', area: 'Marketing' },
-  { id: 3, nombre: 'Carlos', apellido: 'Rodríguez', correo: 'carlos.rod@hotmail.com', sueldo: 550000, telefono: '+54381 123-7890', area: 'IT' },
-  { id: 4, nombre: 'Ana', apellido: 'López', correo: 'ana.lopez@hotmail.com', sueldo: 580000, telefono: '+54381 654-0987', area: 'Recursos Humanos' },
-  { id: 5, nombre: 'Laura', apellido: 'Martínez', correo: 'laura.martinez@hotmail.com', sueldo: 450000, telefono: '+54381 321-6547', area: 'Ventas' },
-];
+import { useState, useEffect } from 'react';
+import { Table, Button, Container, Row, Col, Form, Pagination } from 'react-bootstrap';
+import { getEmpleados } from '../../../CRUD-sv/services/empleadoService'; 
 
 const Listado = () => {
   const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [employeesPerPage] = useState(3); 
-
+  const [employeesPerPage] = useState(3);
+  const [empleados, setEmpleados] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); 
 
   const filteredEmployees = empleados.filter(empleado =>
     empleado.nombre.toLowerCase().includes(search.toLowerCase()) ||
     empleado.apellido.toLowerCase().includes(search.toLowerCase()) ||
     empleado.correo.toLowerCase().includes(search.toLowerCase()) ||
-    empleado.id.toString().includes(search) 
+    empleado.id.toString().includes(search)
   );
+
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
@@ -36,12 +27,35 @@ const Listado = () => {
     setCurrentPage(pageNumber);
   };
 
-
   useEffect(() => {
     setCurrentPage(1);
   }, [search]);
 
   const totalPages = Math.ceil(filteredEmployees.length / employeesPerPage);
+
+  useEffect(() => {
+    const fetchEmpleados = async () => {
+      try {
+        const data = await getEmpleados();
+        setEmpleados(data);
+      } catch (err) {
+        setError('Error al obtener los empleados');
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEmpleados();
+  }, []);
+
+  if (loading) {
+    return <div>Cargando empleados...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
 
   return (
     <Container className="mt-5">
@@ -52,7 +66,7 @@ const Listado = () => {
             type="text"
             placeholder="Buscar por ID, nombre, apellido o correo"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value)} 
           />
         </Col>
       </Row>
