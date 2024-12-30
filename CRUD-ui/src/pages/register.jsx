@@ -45,11 +45,11 @@ const Register = () => {
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#3333', paddingBottom: '15%' }}>
-      <main className="text-center p-4 shadow-lg rounded border border-info" style={{ backgroundColor: '#ffffff', maxWidth: '500px', width: '90%' }}>
-        <h2 className="mb-4" style={{ color: '#363636' }}>Registrarse</h2>
+      <main className="p-4 shadow-lg rounded border border-info" style={{ backgroundColor: '#ffffff', maxWidth: '500px', width: '90%' }}>
+        <h2 className="mb-4 text-center" style={{ color: '#363636' }}>Registrarse</h2>
         {error && <Alert variant="danger">{error}</Alert>}
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="text-start">
           <Form.Group controlId="name" className="mb-3">
             <Form.Label>Nombre</Form.Label>
             <Form.Control
