@@ -53,6 +53,10 @@ const Listado = () => {
   const handleCloseModal = () => setShowModal(false);
   const handleShowModal = () => setShowModal(true);
 
+  const handleGoBack = () => {
+    window.history.back(); 
+  };
+
   if (loading) {
     return <div>Cargando empleados...</div>;
   }
@@ -126,8 +130,9 @@ const Listado = () => {
         </Col>
       </Row>
       <Row className="justify-content-center mt-4">
-        <Col md={12}>
+        <Col md={12} className="d-flex justify-content-between">
           <Button variant="success" onClick={handleShowModal}>Añadir empleado</Button>
+          <Button variant="secondary" onClick={handleGoBack}>Volver</Button>
         </Col>
       </Row>
       <AgregarEmpleado

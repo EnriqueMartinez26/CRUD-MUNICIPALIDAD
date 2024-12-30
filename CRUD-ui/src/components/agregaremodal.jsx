@@ -44,7 +44,7 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="nombre">
+          <Form.Group controlId="nombre" className="mb-4">
             <Form.Label>Nombre</Form.Label>
             <Form.Control
               type="text"
@@ -54,7 +54,7 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="apellido">
+          <Form.Group controlId="apellido" className="mb-4"> 
             <Form.Label>Apellido</Form.Label>
             <Form.Control
               type="text"
@@ -64,7 +64,7 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="correo">
+          <Form.Group controlId="correo" className="mb-4">
             <Form.Label>Correo</Form.Label>
             <Form.Control
               type="email"
@@ -74,7 +74,7 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="telefono">
+          <Form.Group controlId="telefono" className="mb-4">
             <Form.Label>Teléfono</Form.Label>
             <Form.Control
               type="text"
@@ -84,7 +84,7 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="sueldo">
+          <Form.Group controlId="sueldo" className="mb-4">
             <Form.Label>Sueldo</Form.Label>
             <Form.Control
               type="number"
@@ -94,7 +94,7 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="area">
+          <Form.Group controlId="area" className="mb-4">
             <Form.Label>Área</Form.Label>
             <Form.Control
               type="text"
@@ -104,7 +104,7 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit" className="mt-3">
+          <Button variant="success" type="submit" className="mt-3">
             Agregar Empleado
           </Button>
         </Form>
