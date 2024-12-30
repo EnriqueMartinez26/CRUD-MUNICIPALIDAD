@@ -1,28 +1,43 @@
-import { useState, useEffect } from 'react';
-import { Table, Button, Container, Row, Col, Form, Pagination } from 'react-bootstrap';
-import { getEmpleados, deleteEmpleado } from '../../../CRUD-sv/services/empleadoService'; 
-import AgregarEmpleado from '../components/agregaremodal';
+import { useState, useEffect } from "react";
+import {
+  Table,
+  Button,
+  Container,
+  Row,
+  Col,
+  Form,
+  Pagination,
+} from "react-bootstrap";
+import {
+  getEmpleados,
+  deleteEmpleado,
+} from "../../../CRUD-sv/services/empleadoService";
+import AgregarEmpleado from "../components/agregaremodal";
 
 const Listado = () => {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [employeesPerPage] = useState(3);
   const [empleados, setEmpleados] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); 
-  const [mensaje, setMensaje] = useState(''); 
-  const [showModal, setShowModal] = useState(false); 
+  const [error, setError] = useState(null);
+  const [mensaje, setMensaje] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
-  const filteredEmployees = empleados.filter(empleado =>
-    empleado.nombre.toLowerCase().includes(search.toLowerCase()) ||
-    empleado.apellido.toLowerCase().includes(search.toLowerCase()) ||
-    empleado.correo.toLowerCase().includes(search.toLowerCase()) ||
-    empleado.id.toString().includes(search)
+  const filteredEmployees = empleados.filter(
+    (empleado) =>
+      empleado.nombre.toLowerCase().includes(search.toLowerCase()) ||
+      empleado.apellido.toLowerCase().includes(search.toLowerCase()) ||
+      empleado.correo.toLowerCase().includes(search.toLowerCase()) ||
+      empleado.id.toString().includes(search)
   );
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-  const currentEmployees = filteredEmployees.slice(indexOfFirstEmployee, indexOfLastEmployee);
+  const currentEmployees = filteredEmployees.slice(
+    indexOfFirstEmployee,
+    indexOfLastEmployee
+  );
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -40,7 +55,7 @@ const Listado = () => {
         const data = await getEmpleados();
         setEmpleados(data);
       } catch (err) {
-        setError('Error al obtener los empleados');
+        setError("Error al obtener los empleados");
         console.error(err);
       } finally {
         setLoading(false);
@@ -54,7 +69,7 @@ const Listado = () => {
   const handleShowModal = () => setShowModal(true);
 
   const handleGoBack = () => {
-    window.history.back(); 
+    window.history.back();
   };
 
   const handleRefresh = () => {
@@ -64,10 +79,10 @@ const Listado = () => {
   const handleDelete = async (id) => {
     try {
       await deleteEmpleado(id);
-      setEmpleados(empleados.filter(empleado => empleado.id !== id));
-      setMensaje('Empleado eliminado correctamente');
+      setEmpleados(empleados.filter((empleado) => empleado.id !== id));
+      setMensaje("Empleado eliminado correctamente");
     } catch (err) {
-      setError('Error al eliminar el empleado');
+      setError("Error al eliminar el empleado");
       console.error(err);
     }
   };
@@ -81,16 +96,22 @@ const Listado = () => {
   }
 
   return (
-    <Container fluid className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+    <Container
+      fluid
+      className="d-flex flex-column min-vh-100 justify-content-center align-items-center"
+    >
       <main className="flex-grow-1 w-100">
         <Row className="justify-content-center mb-4">
           <Col md={12} className="pt-5">
-            <h1 className="text-center mb-4 fw-bold fst-italic">Listado de Empleados</h1>
+            <h1 className="text-center mb-4 fw-bold fst-italic">
+              Listado de Empleados
+            </h1>
             <Form.Control
               type="text"
               placeholder="Buscar por ID, nombre, apellido o correo"
               value={search}
-              onChange={(e) => setSearch(e.target.value)} 
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-50 mx-auto"
             />
           </Col>
         </Row>
@@ -120,8 +141,16 @@ const Listado = () => {
                     <td className="text-center">{empleado.area}</td>
                     <td className="text-center">${empleado.sueldo}</td>
                     <td className="text-center">
-                      <Button variant="warning" size="sm" className="me-2">Editar</Button>
-                      <Button variant="danger" size="sm" onClick={() => handleDelete(empleado.id)}>Eliminar</Button>
+                      <Button variant="warning" size="sm" className="me-2">
+                        Editar
+                      </Button>
+                      <Button
+                        variant="danger"
+                        size="sm"
+                        onClick={() => handleDelete(empleado.id)}
+                      >
+                        Eliminar
+                      </Button>
                     </td>
                   </tr>
                 ))}
@@ -146,18 +175,24 @@ const Listado = () => {
           </Col>
         </Row>
         <Row className="justify-content-center mt-4">
-          <Col md={12} className="d-flex justify-content-between">
-            <Button variant="success" onClick={handleShowModal}>Añadir empleado</Button>
-            <Button variant="info" onClick={handleRefresh}>Refrescar</Button>
-            <Button variant="secondary" onClick={handleGoBack}>Volver</Button>
+          <Col md={12} className="d-flex justify-content-center gap-3">
+            <Button variant="success" onClick={handleShowModal}>
+              Añadir empleado
+            </Button>
+            <Button variant="info" onClick={handleRefresh}>
+              Refrescar
+            </Button>
+            <Button variant="secondary" onClick={handleGoBack}>
+              Volver
+            </Button>
           </Col>
         </Row>
         <AgregarEmpleado
           show={showModal}
           handleClose={handleCloseModal}
-          setMensaje={setMensaje} 
+          setMensaje={setMensaje}
         />
-        {mensaje && <div className="alert alert-info mt-4">{mensaje}</div>} 
+        {mensaje && <div className="alert alert-info mt-4">{mensaje}</div>}
       </main>
     </Container>
   );
