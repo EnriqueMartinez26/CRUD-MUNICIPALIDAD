@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { process } from 'react-scripts';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
@@ -22,7 +21,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, {
+      const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/login`, {
         email,
         password,
       });
