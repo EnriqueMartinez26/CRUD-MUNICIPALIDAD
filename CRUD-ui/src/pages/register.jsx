@@ -33,12 +33,15 @@ const Register = () => {
         email,
         password,
       });
-      if (response.data.success) {
+
+      if (response.status === 201) {
         alert('Registro exitoso');
         navigate('/login');
+      } else {
+        setError(response.data.error || 'Error en el registro, intente nuevamente');
       }
     } catch (err) {
-      setError('Error en el registro, intente nuevamente');
+      setError(err.response?.data?.error || 'Error en el registro, intente nuevamente');
       console.error('Error al registrar:', err);
     }
   };
