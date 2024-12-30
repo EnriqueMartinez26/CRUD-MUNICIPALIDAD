@@ -22,7 +22,6 @@ router.post('/',
   ],
   crearEmpleado
 );
-
 router.put('/:id',
   [
     body('nombre').notEmpty().withMessage('El nombre es obligatorio'),
@@ -34,6 +33,6 @@ router.put('/:id',
   ],
   actualizarEmpleado
 );
-router.delete('/:id', eliminarEmpleado);
 
+router.delete('/:id', eliminarEmpleado);
 module.exports = router;

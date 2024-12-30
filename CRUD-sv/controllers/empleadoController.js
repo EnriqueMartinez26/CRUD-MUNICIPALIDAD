@@ -1,6 +1,5 @@
 const { validationResult } = require('express-validator');
-const Empleado = require('../models/Empleado.js');
-
+const Empleado = require('../models/Empleado');
 const getEmpleados = async (req, res) => {
   try {
     const empleados = await Empleado.findAll();
@@ -10,7 +9,6 @@ const getEmpleados = async (req, res) => {
     res.status(500).json({ error: 'Error al obtener los empleados' });
   }
 };
-
 const getEmpleadoById = async (req, res) => {
   try {
     const empleado = await Empleado.findByPk(req.params.id);
@@ -24,7 +22,7 @@ const getEmpleadoById = async (req, res) => {
     res.status(500).json({ error: 'Error al obtener el empleado' });
   }
 };
-
+ 
 const crearEmpleado = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -32,20 +30,24 @@ const crearEmpleado = async (req, res) => {
   }
 
   try {
-    const nuevoEmpleado = await Empleado.create(req.body);
+    const { nombre, apellido, correo, telefono, sueldo, area } = req.body;
+    const nuevoEmpleado = new Empleado({
+      nombre,
+      apellido,
+      correo,
+      telefono,
+      sueldo,
+      area
+    });
+    await nuevoEmpleado.save();
+
     res.status(201).json(nuevoEmpleado);
   } catch (error) {
     console.error('Error al crear el empleado:', error);
-    res.status(500).json({ error: 'Error al crear el empleado' });
+    res.status(500).json({ msg: 'Error del servidor' });
   }
 };
-
 const actualizarEmpleado = async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
   try {
     const empleado = await Empleado.findByPk(req.params.id);
     if (empleado) {
@@ -59,6 +61,7 @@ const actualizarEmpleado = async (req, res) => {
     res.status(500).json({ error: 'Error al actualizar el empleado' });
   }
 };
+
 
 const eliminarEmpleado = async (req, res) => {
   try {

@@ -1,7 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import { Table, Button, Container, Row, Col, Form, Pagination } from 'react-bootstrap';
 import { getEmpleados } from '../../../CRUD-sv/services/empleadoService'; 
+import AgregarEmpleado from '../components/agregaremodal';
 
 const Listado = () => {
   const [search, setSearch] = useState('');
@@ -10,14 +10,15 @@ const Listado = () => {
   const [empleados, setEmpleados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null); 
+  const [mensaje, setMensaje] = useState(''); 
 
+  const [showModal, setShowModal] = useState(false); 
   const filteredEmployees = empleados.filter(empleado =>
     empleado.nombre.toLowerCase().includes(search.toLowerCase()) ||
     empleado.apellido.toLowerCase().includes(search.toLowerCase()) ||
     empleado.correo.toLowerCase().includes(search.toLowerCase()) ||
     empleado.id.toString().includes(search)
   );
-
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
@@ -49,6 +50,9 @@ const Listado = () => {
     fetchEmpleados();
   }, []);
 
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModal = () => setShowModal(true);
+
   if (loading) {
     return <div>Cargando empleados...</div>;
   }
@@ -70,7 +74,6 @@ const Listado = () => {
           />
         </Col>
       </Row>
-
       <Row className="justify-content-center">
         <Col md={12}>
           <Table striped bordered hover responsive>
@@ -122,6 +125,18 @@ const Listado = () => {
           </Pagination>
         </Col>
       </Row>
+      <Row className="justify-content-center mt-4">
+        <Col md={12}>
+          <Button variant="success" onClick={handleShowModal}>Añadir empleado</Button>
+        </Col>
+      </Row>
+      <AgregarEmpleado
+        show={showModal}
+        handleClose={handleCloseModal}
+        setMensaje={setMensaje} 
+      />
+
+      {mensaje && <div className="alert alert-info mt-4">{mensaje}</div>} 
     </Container>
   );
 };
