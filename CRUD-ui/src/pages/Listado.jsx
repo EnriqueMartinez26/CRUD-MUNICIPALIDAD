@@ -26,6 +26,12 @@ const Listado = () => {
   const [showModalAgregar, setShowModalAgregar] = useState(false);
   const [showModalEditar, setShowModalEditar] = useState(false);
   const [empleadoSeleccionado, setEmpleadoSeleccionado] = useState(null);
+  
+
+  const [sortConfig, setSortConfig] = useState({
+    key: null,
+    direction: "ascending",
+  });
 
   const filteredEmployees = empleados.filter(
     (empleado) =>
@@ -37,10 +43,6 @@ const Listado = () => {
 
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
-  const currentEmployees = filteredEmployees.slice(
-    indexOfFirstEmployee,
-    indexOfLastEmployee
-  );
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -100,6 +102,34 @@ const Listado = () => {
     }
   };
 
+  const handleSort = (key) => {
+    let direction = "ascending";
+    if (
+      sortConfig.key === key &&
+      sortConfig.direction === "ascending"
+    ) {
+      direction = "descending";
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const sortedEmployees = [...filteredEmployees].sort((a, b) => {
+    if (sortConfig.key) {
+      const aValue = a[sortConfig.key];
+      const bValue = b[sortConfig.key];
+      if (typeof aValue === "string") {
+        return sortConfig.direction === "ascending"
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
+      } else {
+        return sortConfig.direction === "ascending"
+          ? aValue - bValue
+          : bValue - aValue;
+      }
+    }
+    return 0;
+  });
+
   if (loading) {
     return <div>Cargando empleados...</div>;
   }
@@ -128,8 +158,6 @@ const Listado = () => {
             />
           </Col>
         </Row>
-
-        {/* Alert moved above the table with custom styling */}
         {mensaje && (
           <div className="alert alert-info mt-4 w-50 text-center mx-auto">
             {mensaje}
@@ -141,18 +169,35 @@ const Listado = () => {
             <Table striped bordered hover responsive className="text-center">
               <thead>
                 <tr>
-                  <th className="text-center">ID</th>
-                  <th className="text-center">Nombre</th>
-                  <th className="text-center">Apellido</th>
+                  <th
+                    className="text-center"
+                    onClick={() => handleSort("id")}
+                  >
+                    ID {sortConfig.key === "id" ? (sortConfig.direction === "ascending" ? "↑" : "↓") : ""}
+                  </th>
+                  <th
+                    className="text-center"
+                    onClick={() => handleSort("nombre")}
+                  >
+                    Nombre {sortConfig.key === "nombre" ? (sortConfig.direction === "ascending" ? "↑" : "↓") : ""}
+                  </th>
+                  <th
+                    className="text-center"
+                    onClick={() => handleSort("apellido")}
+                  >
+                    Apellido {sortConfig.key === "apellido" ? (sortConfig.direction === "ascending" ? "↑" : "↓") : ""}
+                  </th>
                   <th className="text-center">Correo</th>
                   <th className="text-center">Teléfono</th>
                   <th className="text-center">Área</th>
-                  <th className="text-center">Sueldo</th>
+                  <th className="text-center" onClick={() => handleSort("sueldo")}>
+                    Sueldo {sortConfig.key === "sueldo" ? (sortConfig.direction === "ascending" ? "↑" : "↓") : ""}
+                  </th>
                   <th className="text-center">Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                {currentEmployees.map((empleado) => (
+                {sortedEmployees.slice(indexOfFirstEmployee, indexOfLastEmployee).map((empleado) => (
                   <tr key={empleado.id}>
                     <td className="text-center">{empleado.id}</td>
                     <td className="text-center">{empleado.nombre}</td>

@@ -1,49 +1,23 @@
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
-const Footer = () => (
-  <footer className="text-center py-3 mt-4 bg-light w-100">
-    <p>&copy; 2024 Tu Empresa. Todos los derechos reservados.</p>
-  </footer>
-);
+import { Link } from 'react-router-dom';
+import { Button, Card} from 'react-bootstrap';
+import CRUD from '../images/CRUD.jpg';
 
 const Gestion = () => (
-  <Container className="d-flex flex-column min-vh-100">
-    <Row className="justify-content-center flex-grow-1">
-      <Col md={8} lg={6}>
-        <h1 className="text-center mb-4 fw-bold fst-italic">Gestión</h1>
-      </Col>
-    </Row>
-
-    <Row className="justify-content-center flex-grow-1">
-      <Col md={6} lg={5}>
-        <Card border="info" className="mb-4">
-          <Card.Header>Listado</Card.Header>
-          <Card.Body>
-            <Card.Title>Visualizá una lista con los empleados ya registrados</Card.Title>
-            <Card.Text>(No editable)</Card.Text>
-            <Button variant="primary" href="/listado">Listado</Button>
-          </Card.Body>
-        </Card>
-      </Col>
-
-      <Col md={6} lg={5}>
-        <Card border="primary" className="mb-4">
-          <Card.Header>Administrar</Card.Header>
-          <Card.Body>
-            <Card.Title>Editá la lista de empleados</Card.Title>
-            <Card.Text>(Requiere iniciar como administrador)</Card.Text>
-            <Button variant="success" href="/listado">Administrar</Button>
-          </Card.Body>
-        </Card>
-      </Col>
-    </Row>
-
-    <Footer />
-  </Container>
+  <div className="d-flex justify-content-center align-items-center vh-100" style={{ transform: 'translateY(-5%)' }}>
+    <Card style={{ width: '90%', maxWidth: '800px' }} className="shadow-lg rounded border border-info">
+      <Card.Img variant="top" src={CRUD} style={{ width: '100%', height: 'auto' }} />
+      <Card.Body>
+        <Card.Title className="text-center mb-4" style={{ color: '#363636', fontSize: '1.75rem' }}>
+          Administra los empleados registrados en el sistema
+        </Card.Title>
+        <div className="d-flex justify-content-center gap-4">
+          <Link to="/listado" className="text-decoration-none">
+            <Button variant="primary" size="lg">Administrar Empleados</Button>
+          </Link>
+        </div>
+      </Card.Body>
+    </Card>
+  </div>
 );
 
 export default Gestion;
