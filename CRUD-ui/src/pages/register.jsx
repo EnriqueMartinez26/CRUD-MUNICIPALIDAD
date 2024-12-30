@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import { Form, Button, Alert } from "react-bootstrap";
-import axios from "axios";
+import { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -28,7 +28,7 @@ const Register = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5002/api/register', {
+      const response = await axios.post(`${import.meta.env.VITE_APP_API_URL}/register`, {
         name,
         email,
         password,
@@ -42,17 +42,13 @@ const Register = () => {
       }
     } catch (err) {
       setError(err.response?.data?.error || 'Error en el registro, intente nuevamente');
-      console.error('Error al registrar:', err);
     }
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100" style={{ backgroundColor: '#3333', paddingBottom: '15%' }}>
-      <main className="p-4 shadow-lg rounded border border-info" style={{ backgroundColor: '#ffffff', maxWidth: '500px', width: '90%' }}>
-        <h2 className="mb-4 text-center" style={{ color: '#363636' }}>Registrarse</h2>
-        {error && <Alert variant="danger">{error}</Alert>}
-
-        <Form onSubmit={handleSubmit} className="text-start">
+    <div className="register-container">
+      <main className="form-signin">
+        <Form onSubmit={handleSubmit}>
           <Form.Group controlId="name" className="mb-3">
             <Form.Label>Nombre</Form.Label>
             <Form.Control
@@ -64,7 +60,7 @@ const Register = () => {
           </Form.Group>
 
           <Form.Group controlId="email" className="mb-3">
-            <Form.Label>Correo electrónico</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
               value={email}
@@ -92,6 +88,8 @@ const Register = () => {
               required
             />
           </Form.Group>
+
+          {error && <p className="text-danger">{error}</p>}
 
           <Button variant="primary" type="submit" size="lg" className="w-100">
             Registrarse
