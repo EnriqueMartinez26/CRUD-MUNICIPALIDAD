@@ -1,15 +1,22 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "index.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "./index.js"
-      }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "./index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "./index.js"
+    }
+  ],
+  "env": {
+    "DB_HOST": "mysql.railway.internal",
+    "DB_USER": "root",
+    "DB_PASSWORD": "HeZmZCYVkRLqwywghAHjPmYynajGEyeU",
+    "DB_NAME": "crud_db",
+    "DB_PORT": "3306"
   }
+}
