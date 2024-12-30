@@ -18,7 +18,7 @@ import EditarEmpleado from "../components/editaremodal";
 const Listado = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [employeesPerPage] = useState(3);
+  const [employeesPerPage] = useState(5); // Cambiado de 3 a 5
   const [empleados, setEmpleados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -26,7 +26,6 @@ const Listado = () => {
   const [showModalAgregar, setShowModalAgregar] = useState(false);
   const [showModalEditar, setShowModalEditar] = useState(false);
   const [empleadoSeleccionado, setEmpleadoSeleccionado] = useState(null);
-  
 
   const [sortConfig, setSortConfig] = useState({
     key: null,
@@ -232,7 +231,7 @@ const Listado = () => {
 
         <Row className="justify-content-center">
           <Col md={12}>
-            <Pagination>
+            <Pagination className="d-flex justify-content-center"> {/* Centrado de la paginación */}
               {[...Array(totalPages)].map((_, index) => (
                 <Pagination.Item
                   key={index + 1}
@@ -245,6 +244,7 @@ const Listado = () => {
             </Pagination>
           </Col>
         </Row>
+
         <Row className="justify-content-center mt-4">
           <Col md={12} className="d-flex justify-content-center gap-3">
             <Button variant="dark" onClick={handleRefresh}>
@@ -258,6 +258,7 @@ const Listado = () => {
             </Button>
           </Col>
         </Row>
+
         <AgregarEmpleado
           show={showModalAgregar}
           handleClose={handleCloseModalAgregar}
