@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 5002;
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://statuesque-wisp-9de32d.netlify.app'],
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'https://statuesque-wisp-9de32d.netlify.app'],
   methods: 'GET,POST,PUT,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
 }));
