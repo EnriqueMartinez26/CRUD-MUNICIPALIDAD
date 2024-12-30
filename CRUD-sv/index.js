@@ -19,7 +19,9 @@ app.use(cors({
 
 app.use(express.json()); 
 
+
 app.use(express.static(path.join(__dirname, 'public')));
+
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
