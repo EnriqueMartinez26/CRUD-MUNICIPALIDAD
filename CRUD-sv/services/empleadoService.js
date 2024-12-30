@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5002/api/empleados'; 
+const API_URL = 'http://localhost:5002/api/empleados';
+
 export const getEmpleados = async () => {
   try {
     const response = await axios.get(API_URL);
@@ -10,6 +11,7 @@ export const getEmpleados = async () => {
     throw error;
   }
 };
+
 export const getEmpleadoById = async (id) => {
   try {
     const response = await axios.get(`${API_URL}/${id}`);
@@ -19,6 +21,7 @@ export const getEmpleadoById = async (id) => {
     throw error;
   }
 };
+
 export const crearEmpleado = async (empleadoData) => {
   try {
     const response = await axios.post(API_URL, empleadoData);
@@ -28,6 +31,7 @@ export const crearEmpleado = async (empleadoData) => {
     throw error;
   }
 };
+
 export const actualizarEmpleado = async (id, empleadoData) => {
   try {
     const response = await axios.put(`${API_URL}/${id}`, empleadoData);
@@ -37,7 +41,8 @@ export const actualizarEmpleado = async (id, empleadoData) => {
     throw error;
   }
 };
-export const eliminarEmpleado = async (id) => {
+
+export const deleteEmpleado = async (id) => {
   try {
     await axios.delete(`${API_URL}/${id}`);
   } catch (error) {

@@ -48,17 +48,15 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
             <Form.Label>Nombre</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Ingrese el nombre"
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
             />
           </Form.Group>
 
-          <Form.Group controlId="apellido" className="mb-4"> 
+          <Form.Group controlId="apellido" className="mb-4">
             <Form.Label>Apellido</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Ingrese el apellido"
               value={apellido}
               onChange={(e) => setApellido(e.target.value)}
             />
@@ -68,7 +66,6 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
             <Form.Label>Correo</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Ingrese el correo"
               value={correo}
               onChange={(e) => setCorreo(e.target.value)}
             />
@@ -78,7 +75,6 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
             <Form.Label>Teléfono</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Ingrese el teléfono"
               value={telefono}
               onChange={(e) => setTelefono(e.target.value)}
             />
@@ -88,7 +84,6 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
             <Form.Label>Sueldo</Form.Label>
             <Form.Control
               type="number"
-              placeholder="Ingrese el sueldo"
               value={sueldo}
               onChange={(e) => setSueldo(e.target.value)}
             />
@@ -98,7 +93,6 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
             <Form.Label>Área</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Ingrese el área"
               value={area}
               onChange={(e) => setArea(e.target.value)}
             />
@@ -109,6 +103,12 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
           </Button>
         </Form>
       </Modal.Body>
+      <Modal.Footer style={{ display: 'block' }}>
+  <div className="text-start text-muted">
+    <small>¡Es necesario refrescar cada vez que se añade un empleado!</small>
+  </div>
+</Modal.Footer>
+
     </Modal>
   );
 };

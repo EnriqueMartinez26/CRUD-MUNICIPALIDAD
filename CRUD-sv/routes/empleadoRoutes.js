@@ -10,7 +10,9 @@ const {
 } = require('../controllers/empleadoController');
 
 router.get('/', getEmpleados);
+
 router.get('/:id', getEmpleadoById);
+
 router.post('/',
   [
     body('nombre').notEmpty().withMessage('El nombre es obligatorio'),
@@ -22,6 +24,7 @@ router.post('/',
   ],
   crearEmpleado
 );
+
 router.put('/:id',
   [
     body('nombre').notEmpty().withMessage('El nombre es obligatorio'),
@@ -35,4 +38,5 @@ router.put('/:id',
 );
 
 router.delete('/:id', eliminarEmpleado);
+
 module.exports = router;

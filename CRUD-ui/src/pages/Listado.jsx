@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Table, Button, Container, Row, Col, Form, Pagination } from 'react-bootstrap';
-import { getEmpleados } from '../../../CRUD-sv/services/empleadoService'; 
+import { getEmpleados, deleteEmpleado } from '../../../CRUD-sv/services/empleadoService'; 
 import AgregarEmpleado from '../components/agregaremodal';
 
 const Listado = () => {
@@ -57,6 +57,21 @@ const Listado = () => {
     window.history.back(); 
   };
 
+  const handleRefresh = () => {
+    window.location.reload();
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteEmpleado(id);
+      setEmpleados(empleados.filter(empleado => empleado.id !== id));
+      setMensaje('Empleado eliminado correctamente');
+    } catch (err) {
+      setError('Error al eliminar el empleado');
+      console.error(err);
+    }
+  };
+
   if (loading) {
     return <div>Cargando empleados...</div>;
   }
@@ -66,10 +81,10 @@ const Listado = () => {
   }
 
   return (
-    <Container fluid className="d-flex flex-column min-vh-100">
-      <main className="flex-grow-1">
+    <Container fluid className="d-flex flex-column min-vh-100 justify-content-center align-items-center">
+      <main className="flex-grow-1 w-100">
         <Row className="justify-content-center mb-4">
-          <Col md={12}>
+          <Col md={12} className="pt-5">
             <h1 className="text-center mb-4 fw-bold fst-italic">Listado de Empleados</h1>
             <Form.Control
               type="text"
@@ -84,29 +99,29 @@ const Listado = () => {
             <Table striped bordered hover responsive>
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>Correo</th>
-                  <th>Teléfono</th>
-                  <th>Área</th>
-                  <th>Sueldo</th>
-                  <th>Acciones</th>
+                  <th className="text-center">ID</th>
+                  <th className="text-center">Nombre</th>
+                  <th className="text-center">Apellido</th>
+                  <th className="text-center">Correo</th>
+                  <th className="text-center">Teléfono</th>
+                  <th className="text-center">Área</th>
+                  <th className="text-center">Sueldo</th>
+                  <th className="text-center">Acciones</th>
                 </tr>
               </thead>
               <tbody>
                 {currentEmployees.map((empleado) => (
                   <tr key={empleado.id}>
-                    <td>{empleado.id}</td>
-                    <td>{empleado.nombre}</td>
-                    <td>{empleado.apellido}</td>
-                    <td>{empleado.correo}</td>
-                    <td>{empleado.telefono}</td>
-                    <td>{empleado.area}</td>
-                    <td>${empleado.sueldo}</td>
-                    <td>
+                    <td className="text-center">{empleado.id}</td>
+                    <td className="text-center">{empleado.nombre}</td>
+                    <td className="text-center">{empleado.apellido}</td>
+                    <td className="text-center">{empleado.correo}</td>
+                    <td className="text-center">{empleado.telefono}</td>
+                    <td className="text-center">{empleado.area}</td>
+                    <td className="text-center">${empleado.sueldo}</td>
+                    <td className="text-center">
                       <Button variant="warning" size="sm" className="me-2">Editar</Button>
-                      <Button variant="danger" size="sm">Eliminar</Button>
+                      <Button variant="danger" size="sm" onClick={() => handleDelete(empleado.id)}>Eliminar</Button>
                     </td>
                   </tr>
                 ))}
@@ -133,6 +148,7 @@ const Listado = () => {
         <Row className="justify-content-center mt-4">
           <Col md={12} className="d-flex justify-content-between">
             <Button variant="success" onClick={handleShowModal}>Añadir empleado</Button>
+            <Button variant="info" onClick={handleRefresh}>Refrescar</Button>
             <Button variant="secondary" onClick={handleGoBack}>Volver</Button>
           </Col>
         </Row>
