@@ -37,9 +37,9 @@ const Login = () => {
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-start my-5" style={{ paddingTop: '15px' }}>
+    <Container className="d-flex justify-content-center align-items-start my-5">
       <Row className="justify-content-center w-100">
-        <Col xs={12} sm={10} md={8} lg={6}>
+      <Col xs={12} sm={10} md={6} lg={5}>
           <div className="p-4 shadow-lg rounded bg-white">
             <h2 className="text-center mb-4" style={{ color: '#333' }}>Iniciar sesión</h2>
             {error && <Alert variant="danger">{error}</Alert>}

@@ -1,5 +1,7 @@
-import { useState } from "react"; 
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 import axios from "axios";
 
 const Register = () => {
@@ -9,8 +11,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +36,6 @@ const Register = () => {
         password,
       });
   
-     
       setSuccess('Usuario registrado exitosamente');
       setTimeout(() => navigate("/login"), 2000); 
     } catch (err) {
@@ -43,148 +43,73 @@ const Register = () => {
       console.error(err);
     }
   };
-  
-
-  const handleLoginRedirect = () => {
-    navigate("/login");
-  };
 
   return (
-    <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <h2 style={styles.h2}>Registrarse</h2>
-        {error && <p style={styles.error}>{error}</p>}
-        {success && <p style={styles.success}>{success}</p>}
-        
-        <div style={styles.inputGroup}>
-          <label htmlFor="name" style={styles.label}>Nombre</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            style={styles.input}
-            required
-          />
-        </div>
+    <Container className="d-flex justify-content-center align-items-start my-5">
+      <Row className="justify-content-center w-100">
+        <Col xs={12} sm={10} md={6} lg={5}>
+          <div className="p-4 shadow-lg rounded bg-white">
+            <h2 className="text-center mb-4" style={{ color: '#333' }}>Registrarse</h2>
+            {error && <Alert variant="danger">{error}</Alert>}
+            {success && <Alert variant="success">{success}</Alert>}
 
-        <div style={styles.inputGroup}>
-          <label htmlFor="email" style={styles.label}>Correo electrónico</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={styles.input}
-            required
-          />
-        </div>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="name" className="mb-3">
+                <Form.Label>Nombre</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </Form.Group>
 
-        <div style={styles.inputGroup}>
-          <label htmlFor="password" style={styles.label}>Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
-            required
-          />
-        </div>
+              <Form.Group controlId="email" className="mb-3">
+                <Form.Label>Correo electrónico</Form.Label>
+                <Form.Control
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </Form.Group>
 
-        <div style={styles.inputGroup}>
-          <label htmlFor="confirmPassword" style={styles.label}>Confirmar Contraseña</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            style={styles.input}
-            required
-          />
-        </div>
+              <Form.Group controlId="password" className="mb-3">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </Form.Group>
 
-        <button type="submit" style={styles.button}>Registrarse</button>
-        <p style={styles.text}>
-          ¿Ya tienes una cuenta?{' '}
-          <span style={styles.link} onClick={handleLoginRedirect}>
-            Inicia sesión
-          </span>
-        </p>
-      </form>
-    </div>
+              <Form.Group controlId="confirmPassword" className="mb-3">
+                <Form.Label>Confirmar Contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </Form.Group>
+
+              <Button variant="primary" type="submit" size="lg" className="w-100">
+                Registrarse
+              </Button>
+            </Form>
+
+            <p className="mt-3 text-center">
+              ¿Ya tienes una cuenta?{" "}
+              <Link to="/login" style={{ textDecoration: 'none', color: '#007bff' }}>
+                Inicia sesión
+              </Link>
+            </p>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
-};
-
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '85vh',
-    backgroundColor: '#f4f4f4',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '2rem',
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-    width: '100%',
-    maxWidth: '400px',
-  },
-  h2: {
-    marginBottom: '1.5rem',
-    textAlign: 'center',
-    color: '#333',
-  },
-  inputGroup: {
-    marginBottom: '1rem',
-  },
-  label: {
-    fontSize: '1em',
-    color: '#333',
-  },
-  input: {
-    width: '100%',
-    padding: '0.8rem',
-    marginTop: '0.5rem',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    fontSize: '1em',
-  },
-  button: {
-    padding: '0.8rem',
-    backgroundColor: '#007bff',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '5px',
-    fontSize: '1.2em',
-    cursor: 'pointer',
-    marginTop: '1rem',
-  },
-  error: {
-    color: 'red',
-    fontSize: '1em',
-    marginBottom: '1rem',
-  },
-  success: {
-    color: 'green',
-    fontSize: '1em',
-    marginBottom: '1rem',
-  },
-  text: {
-    marginTop: '1rem',
-    fontSize: '0.9em',
-    textAlign: 'center',
-    color: '#333',
-  },
-  link: {
-    color: '#007bff',
-    cursor: 'pointer',
-    textDecoration: 'underline',
-  },
 };
 
 export default Register;
