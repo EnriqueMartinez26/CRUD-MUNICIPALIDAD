@@ -6,24 +6,21 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5002;
 
+// Configuración de CORS mejorada
 const allowedOrigins = [
   'http://localhost:5173',
   'https://statuesque-wisp-9de32d.netlify.app',
-  process.env.FRONTEND_URL 
-];
+  'https://crud-hyceuvv4o-enriquemartinez26s-projects.vercel.app',
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
 app.use(cors({
-  origin: function(origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: allowedOrigins,
   credentials: true
 }));
 
 app.use(express.json());
+
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
@@ -36,6 +33,7 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   },
   logging: false
 });
+
 sequelize.authenticate()
   .then(() => {
     console.log('✅ Conexión a Railway DB establecida correctamente');
@@ -61,24 +59,21 @@ app.get('/api/health', (req, res) => {
     database: process.env.DB_HOST
   });
 });
+
 app.use((err, req, res, next) => {
-  console.error('❌ Error:', err.stack);
+  console.error('❌ Error:', err);
   res.status(500).json({ 
     error: 'Internal Server Error',
     message: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
   });
 });
 
-const server = app.listen(PORT, () => {
-  console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
-  console.log(`🌍 Modo: ${process.env.NODE_ENV}`);
-});
-
-process.on('SIGTERM', () => {
-  server.close(() => {
-    console.log('❌ Servidor terminado');
-    sequelize.close();
+// Iniciar servidor
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
+    console.log(`🌍 Modo: ${process.env.NODE_ENV}`);
   });
-});
+}
 
 module.exports = app;

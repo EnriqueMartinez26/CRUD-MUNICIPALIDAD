@@ -1,16 +1,17 @@
-{ "engines": {"node": ">=14"},
+{
   "name": "crud-sv",
   "version": "1.0.0",
   "description": "Backend CRUD con Node.js y Express",
   "main": "index.js",
+  "engines": {
+    "node": ">=14",
+    "npm": ">=6"
+  },
   "scripts": {
     "start": "node index.js",
+    "build": "npm install",
     "dev": "nodemon index.js"
-    
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
