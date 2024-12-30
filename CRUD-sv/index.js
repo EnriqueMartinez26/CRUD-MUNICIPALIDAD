@@ -9,19 +9,18 @@ const empleadoRoutes = require('./routes/empleadoRoutes');
 const app = express();
 const PORT = process.env.PORT || 5002;
 
-
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://statuesque-wisp-9de32d.netlify.app'], 
+  origin: ['http://localhost:5173', 'https://statuesque-wisp-9de32d.netlify.app'],
   methods: 'GET,POST,PUT,DELETE',
   allowedHeaders: 'Content-Type,Authorization',
 }));
 
-app.use(express.json());  
+app.use(express.json()); 
 
 app.use('/api', userRoutes);
 app.use('/api/register', registerRouter);
 app.use('/api', loginRouter);
-app.use('/api/empleados', empleadoRoutes);  
+app.use('/api/empleados', empleadoRoutes);
 
 sequelize.authenticate()
   .then(() => {
