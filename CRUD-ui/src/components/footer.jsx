@@ -1,7 +1,11 @@
+import { Container } from 'react-bootstrap';
+
 const Footer = () => (
-    <footer>
+  <footer style={{ backgroundColor: '#647197' }} className="text-white py-3 fixed-bottom">
+    <Container className="text-center">
       <p>&copy; PRUEBA MUNICIPALIDAD</p>
-    </footer>
-  );
-  
-  export default Footer;
+    </Container>
+  </footer>
+);
+
+export default Footer;
