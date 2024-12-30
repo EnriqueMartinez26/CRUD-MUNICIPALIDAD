@@ -1,34 +1,34 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
-import { Link } from 'react-router-dom'; 
-import axios from "axios"; 
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!email || !password) {
       setError('Por favor complete todos los campos');
       return;
     }
-    
+
     setError('');
 
     try {
-
       const response = await axios.post('http://localhost:5002/api/login', {
         email,
         password,
       });
       if (response.data.token) {
-        localStorage.setItem('token', response.data.token); 
+        localStorage.setItem('token', response.data.token);
         alert('Iniciado sesión con éxito');
-        navigate('/gestion'); 
+        navigate('/gestion');
       }
     } catch (err) {
       setError('Credenciales incorrectas o error en el servidor');
@@ -37,113 +37,50 @@ const Login = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <h2 style={styles.h2}>Iniciar sesión</h2>
-        {error && <p style={styles.error}>{error}</p>}
-        
-        <div style={styles.inputGroup}>
-          <label htmlFor="email" style={styles.label}>Correo electrónico</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            style={styles.input}
-            required
-          />
-        </div>
+    <Container className="d-flex justify-content-center align-items-start my-5" style={{ paddingTop: '15px' }}>
+      <Row className="justify-content-center w-100">
+        <Col xs={12} sm={10} md={8} lg={6}>
+          <div className="p-4 shadow-lg rounded bg-white">
+            <h2 className="text-center mb-4" style={{ color: '#333' }}>Iniciar sesión</h2>
+            {error && <Alert variant="danger">{error}</Alert>}
 
-        <div style={styles.inputGroup}>
-          <label htmlFor="password" style={styles.label}>Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            style={styles.input}
-            required
-          />
-        </div>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="email" className="mb-3">
+                <Form.Label>Correo electrónico</Form.Label>
+                <Form.Control
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </Form.Group>
 
-        <button type="submit" style={styles.button}>Iniciar sesión</button>
-        <p style={styles.registerText}>
-          ¿No tienes una cuenta?{" "}
-          <Link to="/register" style={styles.registerLink}>
-            Registrarse
-          </Link>
-        </p>
-      </form>
-    </div>
+              <Form.Group controlId="password" className="mb-3">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </Form.Group>
+
+              <Button variant="primary" type="submit" size="lg" className="w-100">
+                Iniciar sesión
+              </Button>
+            </Form>
+
+            <p className="mt-3 text-center">
+              ¿No tienes una cuenta?{" "}
+              <Link to="/register" style={{ textDecoration: 'none', color: '#007bff' }}>
+                Registrarse
+              </Link>
+            </p>
+          </div>
+        </Col>
+      </Row>
+    </Container>
   );
-};
-
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '70vh',
-    backgroundColor: '#f4f4f4',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    padding: '2rem',
-    backgroundColor: '#fff',
-    borderRadius: '8px',
-    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-    width: '100%',
-    maxWidth: '400px',
-  },
-  h2: {
-    marginBottom: '1.5rem',
-    textAlign: 'center',
-    color: '#333',
-  },
-  inputGroup: {
-    marginBottom: '1rem',
-  },
-  label: {
-    fontSize: '1em',
-    color: '#333',
-  },
-  input: {
-    width: '100%',
-    padding: '0.8rem',
-    marginTop: '0.5rem',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    fontSize: '1em',
-    boxSizing: 'border-box',
-  },
-  button: {
-    width: '100%',
-    padding: '0.8rem',
-    backgroundColor: '#007bff',
-    border: 'none',
-    borderRadius: '5px',
-    fontSize: '1.2em',
-    cursor: 'pointer',
-    marginTop: '1rem',
-    color: 'white',  
-    boxSizing: 'border-box',
-  },
-  error: {
-    color: 'red',
-    fontSize: '1em',
-    marginBottom: '1rem',
-  },
-  registerText: {
-    marginTop: '1rem',
-    textAlign: 'center',
-    fontSize: '1em',
-    color: '#333',
-  },
-  registerLink: {
-    color: '#007bff',
-    textDecoration: 'none',
-  },
 };
 
 export default Login;
