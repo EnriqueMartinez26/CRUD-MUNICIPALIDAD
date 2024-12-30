@@ -1,10 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-const sequelize = require('./config/database');
+const { Sequelize } = require('sequelize');
 const userRoutes = require('./routes/userRoutes');
 const registerRouter = require('./routes/registerRouter');
 const loginRouter = require('./routes/loginRouter');
 const empleadoRoutes = require('./routes/empleadoRoutes'); 
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5002;
@@ -16,6 +17,13 @@ app.use(cors({
 }));
 
 app.use(express.json()); 
+
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  dialect: 'mysql',
+  logging: false, 
+});
 
 app.use('/api', userRoutes);
 app.use('/api/register', registerRouter);
