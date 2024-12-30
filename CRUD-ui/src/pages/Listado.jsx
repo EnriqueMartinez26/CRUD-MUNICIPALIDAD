@@ -13,6 +13,7 @@ import {
   deleteEmpleado,
 } from "../../../CRUD-sv/services/empleadoService";
 import AgregarEmpleado from "../components/agregaremodal";
+import EditarEmpleado from "../components/editaremodal";
 
 const Listado = () => {
   const [search, setSearch] = useState("");
@@ -22,7 +23,9 @@ const Listado = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [mensaje, setMensaje] = useState("");
-  const [showModal, setShowModal] = useState(false);
+  const [showModalAgregar, setShowModalAgregar] = useState(false);
+  const [showModalEditar, setShowModalEditar] = useState(false);
+  const [empleadoSeleccionado, setEmpleadoSeleccionado] = useState(null);
 
   const filteredEmployees = empleados.filter(
     (empleado) =>
@@ -65,8 +68,18 @@ const Listado = () => {
     fetchEmpleados();
   }, []);
 
-  const handleCloseModal = () => setShowModal(false);
-  const handleShowModal = () => setShowModal(true);
+  const handleCloseModalAgregar = () => setShowModalAgregar(false);
+  const handleShowModalAgregar = () => setShowModalAgregar(true);
+
+  const handleCloseModalEditar = () => {
+    setShowModalEditar(false);
+    setEmpleadoSeleccionado(null);
+  };
+
+  const handleShowModalEditar = (empleado) => {
+    setEmpleadoSeleccionado(empleado);
+    setShowModalEditar(true);
+  };
 
   const handleGoBack = () => {
     window.history.back();
@@ -111,13 +124,21 @@ const Listado = () => {
               placeholder="Buscar por ID, nombre, apellido o correo"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-50 mx-auto"
+              className="w-25 mx-auto"
             />
           </Col>
         </Row>
+
+        {/* Alert moved above the table with custom styling */}
+        {mensaje && (
+          <div className="alert alert-info mt-4 w-50 text-center mx-auto">
+            {mensaje}
+          </div>
+        )}
+
         <Row className="justify-content-center">
           <Col md={12}>
-            <Table striped bordered hover responsive>
+            <Table striped bordered hover responsive className="text-center">
               <thead>
                 <tr>
                   <th className="text-center">ID</th>
@@ -141,7 +162,12 @@ const Listado = () => {
                     <td className="text-center">{empleado.area}</td>
                     <td className="text-center">${empleado.sueldo}</td>
                     <td className="text-center">
-                      <Button variant="warning" size="sm" className="me-2">
+                      <Button
+                        variant="warning"
+                        size="sm"
+                        className="me-2"
+                        onClick={() => handleShowModalEditar(empleado)}
+                      >
                         Editar
                       </Button>
                       <Button
@@ -176,11 +202,11 @@ const Listado = () => {
         </Row>
         <Row className="justify-content-center mt-4">
           <Col md={12} className="d-flex justify-content-center gap-3">
-            <Button variant="success" onClick={handleShowModal}>
-              Añadir empleado
-            </Button>
-            <Button variant="info" onClick={handleRefresh}>
+            <Button variant="dark" onClick={handleRefresh}>
               Refrescar
+            </Button>
+            <Button variant="success" onClick={handleShowModalAgregar}>
+              Añadir empleado
             </Button>
             <Button variant="secondary" onClick={handleGoBack}>
               Volver
@@ -188,11 +214,18 @@ const Listado = () => {
           </Col>
         </Row>
         <AgregarEmpleado
-          show={showModal}
-          handleClose={handleCloseModal}
+          show={showModalAgregar}
+          handleClose={handleCloseModalAgregar}
           setMensaje={setMensaje}
         />
-        {mensaje && <div className="alert alert-info mt-4">{mensaje}</div>}
+        <EditarEmpleado
+          show={showModalEditar}
+          handleClose={handleCloseModalEditar}
+          empleado={empleadoSeleccionado}
+          setEmpleados={setEmpleados}
+          empleados={empleados}
+          setMensaje={setMensaje}
+        />
       </main>
     </Container>
   );
