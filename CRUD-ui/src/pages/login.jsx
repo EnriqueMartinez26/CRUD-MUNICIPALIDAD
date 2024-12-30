@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";  
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"; 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setError('Por favor complete todos los campos');
@@ -14,7 +16,20 @@ const Login = () => {
     }
     setError('');
     
-    alert('Iniciado sesión con éxito');
+    try {
+      const response = await axios.post('http://localhost:5002/api/login', {
+        email,
+        password,
+      });
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        alert('Iniciado sesión con éxito');
+        navigate('/dashboard');
+      }
+    } catch (err) {
+      setError('Credenciales incorrectas o error en el servidor');
+      console.error('Error al iniciar sesión:', err);
+    }
   };
 
   return (
@@ -49,14 +64,12 @@ const Login = () => {
 
         <button type="submit" style={styles.button}>Iniciar sesión</button>
 
-        {/* Texto y enlace para registrarse */}
         <p style={styles.registerText}>
           ¿No tienes una cuenta?{" "}
           <Link to="/registro" style={styles.registerLink}>
             Registrarse
           </Link>
         </p>
-
       </form>
     </div>
   );
@@ -129,6 +142,5 @@ const styles = {
     textDecoration: 'none',
   },
 };
-
 
 export default Login;

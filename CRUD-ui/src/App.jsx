@@ -18,7 +18,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/tasks" element={<TaskManager />} />
         <Route path='/login' element={<Login />} />
-        <Route path='/registro' element={<Register />} />
+        <Route path='/register' element={<Register />} />
         <Route path='/gestion' element={<Gestion />} />
         <Route path='/crear-usuario' element={<CrearUsuario />} />  
         <Route path='/listar-usuarios' element={<ListarUsuarios />} />

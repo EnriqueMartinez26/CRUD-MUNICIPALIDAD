@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useState } from "react"; 
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -10,28 +11,39 @@ const Register = () => {
   const [success, setSuccess] = useState('');
 
   const navigate = useNavigate(); 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-
+  
     if (!name || !email || !password || !confirmPassword) {
       setError('Por favor complete todos los campos');
       return;
     }
-
+  
     if (password !== confirmPassword) {
       setError('Las contraseñas no coinciden');
       return;
     }
-
+  
     setError('');
     setSuccess('Registro exitoso');
-
-    console.log("Usuario registrado:", { name, email, password });
-
- 
-    setTimeout(() => navigate("/login"), 2000);
+  
+    try {
+      await axios.post('http://localhost:5002/api/register', {
+        name,
+        email,
+        password,
+      });
+  
+     
+      setSuccess('Usuario registrado exitosamente');
+      setTimeout(() => navigate("/login"), 2000); 
+    } catch (err) {
+      setError('Error al registrar el usuario. Inténtalo nuevamente.');
+      console.error(err);
+    }
   };
+  
 
   const handleLoginRedirect = () => {
     navigate("/login");
