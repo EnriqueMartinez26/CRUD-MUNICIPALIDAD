@@ -48,3 +48,5 @@ sequelize.authenticate()
   .catch(err => {
     console.error('Error al conectar con la base de datos:', err);
   });
+  console.log(`Running Node.js version: ${process.version}`);
+process.exit(1); 
