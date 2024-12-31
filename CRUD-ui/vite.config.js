@@ -14,7 +14,7 @@ export default defineConfig({
   define: {
     'process.env': {
       ...import.meta.env,
-      VITE_APP_API_URL: 'https://crud-backend-fu24fjq4x-enriquemartinez26s-projects.vercel.app'
+      VITE_APP_API_URL: 'crud-backend-fu24fjq4x-enriquemartinez26s-projects.vercel.app'
     }
   }
 })
