@@ -3,9 +3,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const router = express.Router();
 
-
 const registerRouter = require('./registerRouter');
-
 
 router.use('/register', registerRouter); 
 
