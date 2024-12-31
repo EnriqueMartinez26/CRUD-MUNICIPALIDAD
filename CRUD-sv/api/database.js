@@ -13,7 +13,7 @@ const sequelize = new Sequelize({
       require: true,
       rejectUnauthorized: false
     },
-    connectTimeout: 60000
+    connectTimeout: 120000 
   },
   logging: false
 });

@@ -38,7 +38,8 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     ssl: {
       require: true,
       rejectUnauthorized: false
-    }
+    },
+    connectTimeout: 120000 
   },
   logging: false
 });
