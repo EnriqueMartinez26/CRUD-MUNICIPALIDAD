@@ -19,4 +19,8 @@ router.get('/users', async (req, res) => {
   }
 });
 
+router.get('/profile', (req, res) => {
+  res.json({ message: 'User profile' });
+});
+
 module.exports = router;

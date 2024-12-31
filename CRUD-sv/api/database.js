@@ -1,9 +1,8 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
-export const PORT = process.env.PORT || 3000
 
 const sequelize = new Sequelize({
-  database: process.env.railway,
+  database: process.env.DB_NAME,
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   host: process.env.DB_HOST,
@@ -15,12 +14,6 @@ const sequelize = new Sequelize({
       rejectUnauthorized: false
     },
     connectTimeout: 60000
-  },
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
   },
   logging: false
 });

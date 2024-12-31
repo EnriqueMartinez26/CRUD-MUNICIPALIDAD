@@ -1,6 +1,55 @@
 const express = require('express');
 const cors = require('cors');
-const sequelize = require('./api/config/database');
+const { Sequelize } = require('sequelize');
+require('dotenv').config();
+
+const app = express();
+const PORT = process.env.PORT || 5002;
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://statuesque-wisp-9de32d.netlify.app',
+  process.env.FRONTEND_URL 
+];
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
+app.use(express.json());
+
+app.use((req, res, next) => {
+  console.log(`📥 ${req.method} ${req.url}`);
+  next();
+});
+
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  dialect: 'mysql',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  },
+  logging: false
+});
+sequelize.authenticate()
+  .then(() => {
+    console.log('✅ Conexión a Railway DB establecida correctamente');
+  })
+  .catch(err => {
+    console.error('❌ Error al conectar con Railway DB:', err);
+  });
+
 const userRoutes = require('./routes/userRoutes');
 const registerRouter = require('./routes/registerRouter');
 const loginRouter = require('./routes/loginRouter');
@@ -53,6 +102,15 @@ const startServer = async () => {
 };
 
 startServer();
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`❌ Error: El puerto ${PORT} ya está en uso`);
+    process.exit(1);
+  } else {
+    throw err;
+  }
+});
 
 process.on('SIGTERM', () => {
   console.log('Received SIGTERM. Performing graceful shutdown');

@@ -5,16 +5,12 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   server: {
-    port: 5174,
-    host: true
-  },
-  preview: {
-    port: 5174
-  },
-  define: {
-    'process.env': {
-      ...import.meta.env,
-      VITE_APP_API_URL: 'crud-backend-fu24fjq4x-enriquemartinez26s-projects.vercel.app'
+    proxy: {
+      '/api': {
+        target: 'https://crud-municipalidad-production.up.railway.app',
+        changeOrigin: true,
+        secure: false
+      }
     }
   }
 })
