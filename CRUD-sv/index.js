@@ -1,13 +1,13 @@
 const express = require('express');
 const cors = require('cors');
-const sequelize = require('./config/database');
+const sequelize = require('./api/config/database');
 const userRoutes = require('./routes/userRoutes');
 const registerRouter = require('./routes/registerRouter');
 const loginRouter = require('./routes/loginRouter');
 const empleadoRoutes = require('./routes/empleadoRoutes');
+import { PORT } from './config.js';
 
 const app = express();
-const PORT = process.env.PORT || 5002;
 
 app.use(cors({
   origin: [
