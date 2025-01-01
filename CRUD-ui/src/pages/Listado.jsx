@@ -18,7 +18,7 @@ import EditarEmpleado from "../components/editaremodal";
 const Listado = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [employeesPerPage] = useState(3);
+  const [employeesPerPage] = useState(5); // Mostrar 5 empleados por página
   const [empleados, setEmpleados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -187,7 +187,7 @@ const Listado = () => {
 
         <Row className="justify-content-center">
           <Col md={12}>
-            <Pagination>
+            <Pagination className="d-flex justify-content-end">
               {[...Array(totalPages)].map((_, index) => (
                 <Pagination.Item
                   key={index + 1}
@@ -200,6 +200,7 @@ const Listado = () => {
             </Pagination>
           </Col>
         </Row>
+
         <Row className="justify-content-center mt-4">
           <Col md={12} className="d-flex justify-content-center gap-3">
             <Button variant="dark" onClick={handleRefresh}>

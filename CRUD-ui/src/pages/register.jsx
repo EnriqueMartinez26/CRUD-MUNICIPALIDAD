@@ -5,7 +5,7 @@ import { Form, Button, Alert } from "react-bootstrap";
 import axios from "axios";
 
 const Register = () => {
-  const [name, setName] = useState('');
+  const [usuario, setUsuario] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -15,7 +15,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !password || !confirmPassword) {
+    if (!usuario || !email || !password || !confirmPassword) {
       setError('Por favor complete todos los campos');
       return;
     }
@@ -29,13 +29,13 @@ const Register = () => {
 
     try {
       const response = await axios.post('http://localhost:5002/api/register', {
-        name,
+        usuario,
         email,
         password,
       });
       if (response.data.success) {
         alert('Registro exitoso');
-        navigate('/login');
+        navigate('/gestion'); // Redirige al apartado de gestión
       }
     } catch (err) {
       setError('Error en el registro, intente nuevamente');
@@ -50,12 +50,12 @@ const Register = () => {
         {error && <Alert variant="danger">{error}</Alert>}
 
         <Form onSubmit={handleSubmit} className="text-start">
-          <Form.Group controlId="name" className="mb-3">
-            <Form.Label>Nombre</Form.Label>
+          <Form.Group controlId="usuario" className="mb-3">
+            <Form.Label>Usuario</Form.Label>
             <Form.Control
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
               required
             />
           </Form.Group>

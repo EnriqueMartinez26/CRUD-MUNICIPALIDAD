@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { usuario, email, password } = req.body; 
 
-    if (!name || !email || !password) {
+    if (!usuario || !email || !password) {
       return res.status(400).json({ error: 'Todos los campos son obligatorios' });
     }
 
@@ -18,7 +18,11 @@ router.post('/', async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = await User.create({ name, email, password: hashedPassword });
+    const newUser = await User.create({ 
+      usuario, 
+      email, 
+      password: hashedPassword 
+    });
 
     res.status(201).json({ message: 'Usuario registrado exitosamente', user: newUser });
   } catch (error) {

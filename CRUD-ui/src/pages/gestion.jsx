@@ -1,48 +1,26 @@
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
-const Footer = () => (
-  <footer className="text-center py-3 mt-4 bg-light w-100">
-    <p>&copy; 2024 Tu Empresa. Todos los derechos reservados.</p>
-  </footer>
-);
+import Button from 'react-bootstrap/Button';
+import IMAGE from '../images/189-Preview-1.webp'; 
 
 const Gestion = () => (
-  <Container className="d-flex flex-column min-vh-100">
-    <Row className="justify-content-center flex-grow-1">
-      <Col md={8} lg={6}>
-        <h1 className="text-center mb-4 fw-bold fst-italic">Gestión</h1>
-      </Col>
-    </Row>
-
-    <Row className="justify-content-center flex-grow-1">
-      <Col md={6} lg={5}>
-        <Card border="info" className="mb-4">
-          <Card.Header>Listado</Card.Header>
-          <Card.Body>
-            <Card.Title>Visualizá una lista con los empleados ya registrados</Card.Title>
-            <Card.Text>(No editable)</Card.Text>
-            <Button variant="primary" href="/listado">Listado</Button>
+  <Container className="d-flex flex-column">
+    <Row className="justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+      <Col md={6} lg={5} className="d-flex justify-content-center" style={{ marginBottom: '20%' }}>
+        <Card className="border border-info" style={{ width: '40rem' }}> {/* Utilizando clases de Bootstrap */}
+          <Card.Img variant="top" src={IMAGE} alt="Card image" />
+          <Card.Header className="text-center" style={{ fontSize: '1.5em' }}>Administrar</Card.Header> 
+          <Card.Body className="text-center">
+            <Card.Title style={{ fontSize: '2em' }}>Editá la lista de empleados</Card.Title>
           </Card.Body>
-        </Card>
-      </Col>
-
-      <Col md={6} lg={5}>
-        <Card border="primary" className="mb-4">
-          <Card.Header>Administrar</Card.Header>
-          <Card.Body>
-            <Card.Title>Editá la lista de empleados</Card.Title>
-            <Card.Text>(Requiere iniciar como administrador)</Card.Text>
-            <Button variant="success" href="/listado">Administrar</Button>
+          <Card.Body className="text-center">
+            <Button variant="primary" href="/listado" style={{ fontSize: '1.2em', padding: '10px 20px' }}>Administrar</Button>
           </Card.Body>
         </Card>
       </Col>
     </Row>
-
-    <Footer />
   </Container>
 );
 
