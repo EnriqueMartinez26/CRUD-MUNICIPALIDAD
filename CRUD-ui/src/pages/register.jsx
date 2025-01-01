@@ -28,14 +28,14 @@ const Register = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5002/api/register', {
+      const response = await axios.post('https://crud-sv.vercel.app/api/login', {
         usuario,
         email,
         password,
       });
       if (response.data.success) {
         alert('Registro exitoso');
-        navigate('/gestion'); // Redirige al apartado de gestión
+        navigate('/gestion');
       }
     } catch (err) {
       setError('Error en el registro, intente nuevamente');

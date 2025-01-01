@@ -15,7 +15,7 @@ const AgregarEmpleado = ({ show, handleClose, setMensaje }) => {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:5002/api/empleados', {
+      await axios.post('https://crud-sv.vercel.app/api/empleados', {
         nombre,
         apellido,
         correo,
