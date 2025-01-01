@@ -1,12 +1,13 @@
 {
-    "name": "crud",
+    "name": "client",
     "private": true,
     "version": "0.0.0",
     "type": "module",
     "scripts": {
       "build": "vite build",
       "preview": "vite preview",
-      "start": "serve dist -s -p 5002"
+      "start": "serve dist -s -n -l -p $PORT",
+      "lint": "eslin. --ext js, jsx --report-unused-disable-directives--max-warnings0"
     },
     "dependencies": {
       "axios": "^1.7.9",
