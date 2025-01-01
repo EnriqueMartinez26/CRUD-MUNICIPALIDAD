@@ -6,7 +6,7 @@
     "scripts": {
       "build": "vite build",
       "preview": "vite preview",
-      "start": "serve dist -s -n -l -p $PORT",
+      "start": "serve dist -s -p $PORT",
       "lint": "eslin. --ext js, jsx --report-unused-disable-directives--max-warnings0"
     },
     "dependencies": {
